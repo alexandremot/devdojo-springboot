@@ -29,7 +29,7 @@ public class AnimeController {
         return new ResponseEntity<>(animeService.listAll(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id) {
         log.info(dateutil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
         return new ResponseEntity<>(animeService.findById(id), HttpStatus.OK);
@@ -38,5 +38,11 @@ public class AnimeController {
     @PostMapping
     public ResponseEntity<Anime> save(@RequestBody Anime anime){
         return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        animeService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
