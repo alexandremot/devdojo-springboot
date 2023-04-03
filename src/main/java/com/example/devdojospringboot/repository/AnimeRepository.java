@@ -3,7 +3,5 @@ package com.example.devdojospringboot.repository;
 import com.example.devdojospringboot.domain.Anime;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 public interface AnimeRepository extends JpaRepository<Anime, Long> {
 }
