@@ -30,8 +30,11 @@ public class AnimeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Anime> findById(@PathVariable long id) {
+    public ResponseEntity<Anime> findById(@RequestHeader(value = "x-api-id", required = true) String customHeader,@PathVariable long id) {
         log.info(dateutil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
+        if (customHeader.isBlank()) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } else
         return new ResponseEntity<>(animeService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
     }
 
